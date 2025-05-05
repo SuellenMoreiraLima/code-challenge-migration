@@ -132,7 +132,7 @@ mvn clean test
 ### Novas Funcionalidades
 
 - **Endpoint `/health`**: Adicionado para verificar a saúde do microsserviço.
-- **Configuração Parametrizada**: A URL da API DummyJSON foi parametrizada no arquivo `application-dev.yaml` para suportar múltiplos ambientes.
+- **Configuração Parametrizada**: A URL da API DummyJSON foi parametrizada no arquivo `application.yaml` para suportar múltiplos ambientes.
 
 ### Melhorias Gerais
 
