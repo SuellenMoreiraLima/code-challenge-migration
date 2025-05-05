@@ -1,21 +1,22 @@
 
-# DummyJSON Client - Java 8 e Spring Boot 2.x.x
+# DummyJSON Client - Java 17 e Spring Boot 3.2.5
 
 ## Descrição do Projeto
 
-Este projeto é um microsserviço Java que interage com a API pública [DummyJSON](https://dummyjson.com/docs/products) para realizar operações de busca de produtos. O projeto foi desenvolvido usando Java 8 e Spring Boot 2.6.x.
+Este projeto é um microsserviço Java que interage com a API pública [DummyJSON](https://dummyjson.com/docs/products) para realizar operações de busca de produtos. O projeto foi atualizado para utilizar Java 17 e Spring Boot 3.2.5, garantindo compatibilidade com as versões mais recentes e melhores práticas de desenvolvimento.
 
 ## Objetivo do Desafio
 
-O desafio consiste em migrar este projeto para Java 17 e Spring Boot 3.2.5. Durante a migração, você enfrentará várias dificuldades, incluindo a adaptação ao novo namespace, substituição de métodos depreciados e ajustes em testes unitários.
+O desafio consistiu em migrar o projeto de Java 8 e Spring Boot 2.6.x para Java 17 e Spring Boot 3.2.5. Durante a migração, foram realizadas diversas melhorias e ajustes para garantir a funcionalidade e modernização do código.
 
 ## Funcionalidades
 
 - **Consulta de Produtos**: Realiza chamadas para a API do DummyJSON para buscar informações sobre produtos.
-- **Integração com `RestTemplate`**: Utiliza `RestTemplate` para realizar chamadas HTTP.
-- **Validação de Dados**: Validação de dados de entrada usando Bean Validation (`javax.validation`).
-- **Gestão de Dependências**: Configurado para utilizar @Autowired.
-- **Testes Unitários**: Inclui testes unitários desenvolvidos com JUnit 4 e Mockito.
+- **Integração com `WebClient`**: Substituição do `RestTemplate` por `WebClient` para chamadas HTTP reativas.
+- **Validação de Dados**: Validação de dados de entrada usando Bean Validation (`jakarta.validation`).
+- **Gestão de Dependências**: Configurado para utilizar injeção de dependências com `@Autowired` e `@Bean`.
+- **Testes de Integração**: Testes utilizando `@SpringBootTest` para garantir a integração entre os componentes.
+- **Endpoint de Saúde**: Adicionado o endpoint `/health` para verificar a saúde do microsserviço.
 
 ## Estrutura do Projeto
 
@@ -27,9 +28,10 @@ dummyjson-client
 │   │   │   └── com.example.dummyjsonclient
 │   │   │       ├── DummyJsonClientApplication.java
 │   │   │       ├── config
-│   │   │       │   └── RestTemplateConfig.java
+│   │   │       │   └── WebClientConfig.java
 │   │   │       ├── controller
-│   │   │       │   └── ProductController.java
+│   │   │       │   ├── ProductController.java
+│   │   │       │   └── HealthController.java
 │   │   │       ├── dto
 │   │   │       │   └── Product.java
 │   │   │       ├── service
@@ -40,9 +42,10 @@ dummyjson-client
 │       ├── java
 │       │   └── com.example.dummyjsonclient
 │       │       ├── config
-│       │       │   └── RestTemplateConfigTest.java
+│       │       │   └── WebClientConfigTest.java
 │       │       └── controller
-│       │       │   └── ProductControllerTest.java
+│       │       │   ├── ProductControllerTest.java
+│       │       │   └── HealthControllerTest.java
 │       │       ├── dto
 │       │       │   └── ProductTest.java
 │       │       └── service
@@ -55,7 +58,7 @@ dummyjson-client
 
 ### Pré-requisitos
 
-- **Java 8**
+- **Java 17**
 - **Maven 3.8.x**
 
 ### Executar a Aplicação
@@ -80,7 +83,7 @@ dummyjson-client
 
 ### Executar Testes
 
-Para executar os testes unitários:
+Para executar os testes de integração:
 
 ```bash
 mvn clean test
@@ -99,10 +102,42 @@ mvn clean test
 ## Validação Sobre o Challenge
 
 - O projeto deve estar funcionando em Java 17 e Spring Boot 3.2.5.
-- Todos os testes unitários devem ser executados e passar sem falhas.
-- O código deve estar devidamente documentado e organizado.
+- Todos os testes devem passar sem falhas.
+- O código deve estar limpo, organizado e devidamente documentado.
 
 ## Extras
 
 - Entregar o projeto em container será um diferencial.
 - Fica a critério do desenvolvedor inserir ou remover dependencias do projeto para garantir o objetivo do challenge.
+
+## Modificações Realizadas
+
+### Atualização de Versões
+
+- **Java**: Atualizado de Java 8 para Java 17.
+- **Spring Boot**: Atualizado de 2.6.x para 3.2.5.
+- **Dependências**: Atualizadas para versões compatíveis com Java 17 e Spring Boot 3.2.5.
+
+### Substituição de Tecnologias
+
+- **`RestTemplate`**: Substituído por `OpenFeign` para chamadas HTTP declarativas.
+- **`javax.validation`**: Substituído por `jakarta.validation` devido à mudança de namespace no Spring Boot 3.
+
+### Refatoração de Testes
+
+- **JUnit 4**: Substituído por JUnit 5.
+- **Mockito**: Ajustado para funcionar com as novas versões.
+- **Testes de Integração**: Implementados utilizando `@SpringBootTest` com `TestRestTemplate` e `FeignClient`.
+
+### Novas Funcionalidades
+
+- **Endpoint `/health`**: Adicionado para verificar a saúde do microsserviço.
+- **Configuração Parametrizada**: A URL da API DummyJSON foi parametrizada no arquivo `application-dev.yaml` para suportar múltiplos ambientes.
+
+### Melhorias Gerais
+
+- **Cobertura de Testes**: Aumentada para atender aos requisitos do Sonar.
+- **Código Depreciado**: Removido e substituído por alternativas modernas.
+- **Documentação**: Atualizada para refletir as mudanças realizadas.
+
+## Requisitos de Validação# code-challenge-migration
