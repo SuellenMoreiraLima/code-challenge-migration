@@ -1,8 +1,5 @@
 server:
   port: 8080
-  spring:
-    profiles:
-      active: dev
 dummyjson:
   api:
     url: https://dummyjson.com
@@ -18,6 +15,3 @@ management:
   health:
     details:
       enabled: true
-spring:
-  profiles:
-    active: dev
